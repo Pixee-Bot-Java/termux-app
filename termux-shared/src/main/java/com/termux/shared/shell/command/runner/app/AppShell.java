@@ -20,6 +20,7 @@ import com.termux.shared.shell.command.ExecutionCommand.ExecutionState;
 import com.termux.shared.shell.command.environment.IShellEnvironment;
 import com.termux.shared.shell.ShellUtils;
 import com.termux.shared.shell.StreamGobbler;
+import io.github.pixee.security.SystemCommand;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -128,7 +129,7 @@ public final class AppShell {
         // Exec the process
         final Process process;
         try {
-            process = Runtime.getRuntime().exec(commandArray, environmentArray, new File(executionCommand.workingDirectory));
+            process = SystemCommand.runCommand(Runtime.getRuntime(), commandArray, environmentArray, new File(executionCommand.workingDirectory));
         } catch (IOException e) {
             executionCommand.setStateFailed(Errno.ERRNO_FAILED.getCode(), currentPackageContext.getString(R.string.error_failed_to_execute_app_shell_command, executionCommand.getCommandIdAndLabelLogString()), e);
             AppShell.processAppShellResult(null, executionCommand);
