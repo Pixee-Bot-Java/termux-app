@@ -13,6 +13,7 @@ import com.termux.shared.R;
 import com.termux.shared.data.DataUtils;
 import com.termux.shared.logger.Logger;
 import com.termux.shared.markdown.MarkdownUtils;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -189,7 +190,7 @@ public class AndroidUtils {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line, key, value;
 
-            while ((line = bufferedReader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null) {
                 Matcher matcher = propertiesPattern.matcher(line);
                 if (matcher.matches()) {
                     key = matcher.group(1);

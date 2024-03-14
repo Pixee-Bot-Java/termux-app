@@ -22,6 +22,7 @@ import com.termux.shared.android.PackageUtils;
 import com.termux.shared.termux.TermuxConstants;
 import com.termux.shared.termux.TermuxUtils;
 import com.termux.shared.termux.shell.command.environment.TermuxShellEnvironment;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -163,7 +164,7 @@ final class TermuxInstaller {
                             if (zipEntry.getName().equals("SYMLINKS.txt")) {
                                 BufferedReader symlinksReader = new BufferedReader(new InputStreamReader(zipInput));
                                 String line;
-                                while ((line = symlinksReader.readLine()) != null) {
+                                while ((line = BoundedLineReader.readLine(symlinksReader, 5_000_000)) != null) {
                                     String[] parts = line.split("←");
                                     if (parts.length != 2)
                                         throw new RuntimeException("Malformed symlink line: " + line);

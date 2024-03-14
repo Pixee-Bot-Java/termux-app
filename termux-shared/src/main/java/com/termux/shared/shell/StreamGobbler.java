@@ -16,6 +16,7 @@
 
 package com.termux.shared.shell;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -199,7 +200,7 @@ public class StreamGobbler extends Thread {
         // optionally pausing when a command is executed that consumes the InputStream itself
         try {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 if (loggingEnabled)
                     Logger.logVerboseForce(defaultLogTag + "Command", String.format(Locale.ENGLISH, "[%s] %s", shell, line)); // This will get truncated by LOGGER_ENTRY_MAX_LEN, likely 4KB
 

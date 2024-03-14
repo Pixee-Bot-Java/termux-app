@@ -14,6 +14,7 @@ import com.termux.shared.logger.Logger;
 import com.termux.shared.errors.Errno;
 import com.termux.shared.errors.Error;
 import com.termux.shared.errors.FunctionErrno;
+import io.github.pixee.security.BoundedLineReader;
 
 import org.apache.commons.io.filefilter.AgeFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
@@ -1564,7 +1565,7 @@ public class FileUtils {
             String receiveString;
 
             boolean firstLine = true;
-            while ((receiveString = bufferedReader.readLine()) != null ) {
+            while ((receiveString = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null ) {
                 if (!firstLine) dataStringBuilder.append("\n"); else firstLine = false;
                 dataStringBuilder.append(receiveString);
             }
