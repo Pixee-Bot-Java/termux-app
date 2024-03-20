@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 
 import com.termux.shared.data.DataUtils;
 import com.termux.shared.logger.Logger;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,7 +40,7 @@ public class UrlUtils {
     public static String joinUrl(final String base, String destination, boolean logError) {
         if (DataUtils.isNullOrEmpty(base)) return null;
         try {
-            return new URL(new URL(base), destination).toString();
+            return Urls.create(Urls.create(base, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), destination, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString();
         } catch (MalformedURLException e) {
             if (logError)
                 Logger.logError(LOG_TAG, "Failed to join url base \"" + base + "\" and destination \"" + destination + "\": " + e.getMessage());
@@ -56,7 +58,7 @@ public class UrlUtils {
     public static URL getUrl(String urlString) {
         if (DataUtils.isNullOrEmpty(urlString)) return null;
         try {
-            return new URL(urlString);
+            return Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (MalformedURLException e) {
             return null;
         }
