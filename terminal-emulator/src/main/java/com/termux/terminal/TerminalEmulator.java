@@ -894,7 +894,7 @@ public final class TerminalEmulator {
                 String dcs = mOSCOrDeviceControlArgs.toString();
                 // DCS $ q P t ST. Request Status String (DECRQSS)
                 if (dcs.startsWith("$q")) {
-                    if (dcs.equals("$q\"p")) {
+                    if ("$q\"p".equals(dcs)) {
                         // DECSCL, conformance level, http://www.vt100.net/docs/vt510-rm/DECSCL:
                         String csiString = "64;1\"p";
                         mSession.write("\033P1$r" + csiString + "\033\\");

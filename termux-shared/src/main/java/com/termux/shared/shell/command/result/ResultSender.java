@@ -226,7 +226,7 @@ public class ResultSender {
             } else {
                 try {
                     if (DataUtils.isNullOrEmpty(resultConfig.resultFileOutputFormat)) {
-                        if (resultDataStderr.isEmpty() && resultDataExitCode.equals("0"))
+                        if (resultDataStderr.isEmpty() && "0".equals(resultDataExitCode))
                             error_or_output = String.format(RESULT_SENDER.FORMAT_SUCCESS_STDOUT, resultDataStdout);
                         else if (resultDataStderr.isEmpty())
                             error_or_output = String.format(RESULT_SENDER.FORMAT_SUCCESS_STDOUT__EXIT_CODE,

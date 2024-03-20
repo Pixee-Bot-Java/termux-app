@@ -469,7 +469,7 @@ public abstract class TermuxSharedProperties {
         if (value == null) return null;
         String[] parts = value.toLowerCase().trim().split("\\+");
         String input = parts.length == 2 ? parts[1].trim() : null;
-        if (!(parts.length == 2 && parts[0].trim().equals("ctrl")) || input.isEmpty() || input.length() > 2) {
+        if (!(parts.length == 2 && "ctrl".equals(parts[0].trim())) || input.isEmpty() || input.length() > 2) {
             Logger.logError(LOG_TAG, "Keyboard shortcut '" + key + "' is not Ctrl+<something>");
             return null;
         }
