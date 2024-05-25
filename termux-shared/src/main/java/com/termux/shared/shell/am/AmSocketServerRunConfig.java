@@ -64,6 +64,7 @@ public class AmSocketServerRunConfig extends LocalSocketRunConfig implements Ser
 
     /** Get a log {@link String} for the {@link AmSocketServerRunConfig}. */
     @NonNull
+    @Override
     public String getLogString() {
         StringBuilder logString = new StringBuilder();
         logString.append(super.getLogString()).append("\n\n\n");
@@ -87,6 +88,7 @@ public class AmSocketServerRunConfig extends LocalSocketRunConfig implements Ser
 
     /** Get a markdown {@link String} for the {@link AmSocketServerRunConfig}. */
     @NonNull
+    @Override
     public String getMarkdownString() {
         StringBuilder markdownString = new StringBuilder();
         markdownString.append(super.getMarkdownString()).append("\n\n\n");
