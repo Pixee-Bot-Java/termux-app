@@ -77,11 +77,11 @@ public final class TerminalColorScheme {
             String value = (String) entries.getValue();
             int colorIndex;
 
-            if (key.equals("foreground")) {
+            if ("foreground".equals(key)) {
                 colorIndex = TextStyle.COLOR_INDEX_FOREGROUND;
-            } else if (key.equals("background")) {
+            } else if ("background".equals(key)) {
                 colorIndex = TextStyle.COLOR_INDEX_BACKGROUND;
-            } else if (key.equals("cursor")) {
+            } else if ("cursor".equals(key)) {
                 colorIndex = TextStyle.COLOR_INDEX_CURSOR;
                 cursorPropExists = true;
             } else if (key.startsWith("color")) {

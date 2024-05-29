@@ -161,7 +161,7 @@ final class TermuxInstaller {
                     try (ZipInputStream zipInput = ZipSecurity.createHardenedInputStream(new ByteArrayInputStream(zipBytes))) {
                         ZipEntry zipEntry;
                         while ((zipEntry = zipInput.getNextEntry()) != null) {
-                            if (zipEntry.getName().equals("SYMLINKS.txt")) {
+                            if ("SYMLINKS.txt".equals(zipEntry.getName())) {
                                 BufferedReader symlinksReader = new BufferedReader(new InputStreamReader(zipInput));
                                 String line;
                                 while ((line = symlinksReader.readLine()) != null) {
